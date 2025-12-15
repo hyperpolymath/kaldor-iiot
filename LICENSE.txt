@@ -1,15 +1,19 @@
-# Palimpsest License v0.8
+SPDX-License-Identifier: MIT OR AGPL-3.0-or-later
+SPDX-FileCopyrightText: 2024-2025 hyperpolymath
 
-## Primary License: MIT + Apache-2.0 Dual License
+================================================================================
+DUAL LICENSE: MIT OR AGPL-3.0-or-later
+================================================================================
 
-This software is dual-licensed under the MIT License and Apache License 2.0.
-You may choose either license to govern your use of this software.
+This project is dual-licensed under the MIT License OR the GNU Affero General
+Public License v3.0 or later. You may choose to use, copy, modify, and
+distribute this work under the terms of EITHER license (your choice).
 
----
+--------------------------------------------------------------------------------
+MIT LICENSE
+--------------------------------------------------------------------------------
 
-## MIT License
-
-Copyright (c) 2025 Kaldor Community Manufacturing Platform Contributors
+Copyright (c) 2024-2025 hyperpolymath
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,150 +33,59 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----
+--------------------------------------------------------------------------------
+GNU AFFERO GENERAL PUBLIC LICENSE v3.0 OR LATER
+--------------------------------------------------------------------------------
 
-## Apache License 2.0
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version.
 
-Copyright 2025 Kaldor Community Manufacturing Platform Contributors
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+details.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+You should have received a copy of the GNU Affero General Public License along
+with this program. If not, see <https://www.gnu.org/licenses/>.
 
-    http://www.apache.org/licenses/LICENSE-2.0
+The full text of the AGPL-3.0 is available at:
+  https://www.gnu.org/licenses/agpl-3.0.txt
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+--------------------------------------------------------------------------------
+CHOOSING YOUR LICENSE
+--------------------------------------------------------------------------------
 
----
+You may choose to use this work under:
+  1. MIT License - Standard permissive open source license
+  2. AGPL-3.0-or-later - Copyleft license requiring source disclosure for
+     network services
 
-## Palimpsest Addendum
+For most uses, MIT License provides maximum flexibility.
+For ensuring open source remains open (especially for SaaS/network services),
+AGPL-3.0-or-later provides stronger protections.
 
-This license incorporates the **Palimpsest License v0.8** principles:
+================================================================================
+PALIMPSEST PHILOSOPHICAL OVERLAY (NON-BINDING)
+================================================================================
 
-### 1. Community Ownership
+This project encourages (but does not legally require) adherence to the
+principles of the Palimpsest License - a framework for consent-based digital
+interaction and the future web.
 
-All contributions remain owned by their authors but are licensed to the
-community under the terms above. No contributor license agreement (CLA)
-or copyright assignment is required.
+Core Principles (Encouraged):
+  - Respect for emotional and creative lineage
+  - Transparent AI training practices with explicit consent
+  - Preservation of metadata and attribution
+  - Protection of narrative intent and cultural context
 
-### 2. Graduated Trust (TPCF)
+The Palimpsest principles represent our vision for a consent-based internet.
+While not legally binding for use of this software, we encourage all users
+and contributors to familiarize themselves with these principles.
 
-Contributors advance through perimeters based on merit:
-- **Perimeter 3** (Community Sandbox): Open to all
-- **Perimeter 2** (Professional Contributors): Earned through contribution
-- **Perimeter 1** (Core Maintainers): Consensus-based advancement
+Learn more: https://github.com/hyperpolymath/palimpsest-license
 
-See MAINTAINERS.md for details.
-
-### 3. Reversibility
-
-Major decisions can be reversed through community consensus. We value
-experimentation and acknowledge that mistakes happen.
-
-### 4. Emotional Safety
-
-We commit to low-stakes contribution, clear expectations, and anxiety
-reduction. See CODE_OF_CONDUCT.md for our Emotional Temperature principles.
-
-### 5. Offline-First Philosophy
-
-This software prioritizes local autonomy over cloud dependency. All core
-functionality works without internet access.
-
-### 6. Anti-Centralization
-
-This software is designed to decentralize manufacturing, not to create new
-points of centralized control. Use it to empower communities, not extract
-value from them.
-
-### 7. Kaldor's Law Integration
-
-We measure success by productivity growth through manufacturing output growth,
-at the COMMUNITY level, not the corporate level.
-
-"The rate of growth in productivity is positively related to the rate of
-growth of manufacturing output." - Nicholas Kaldor
-
----
-
-## Additional Licensing
-
-### Documentation
-
-All documentation (`.md` files, wiki pages, tutorials) is licensed under
-**Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA-4.0)**.
-
-https://creativecommons.org/licenses/by-sa/4.0/
-
-### Hardware Designs
-
-All hardware designs, CAD files, schematics, and PCB layouts are licensed
-under **CERN Open Hardware License v2 - Strongly Reciprocal (CERN-OHL-S-2.0)**.
-
-https://ohwr.org/cern_ohl_s_v2.txt
-
-### Data/Patterns
-
-All textile patterns, production data, and `.kaldor` format files are
-licensed under **Creative Commons Attribution-ShareAlike 4.0 International**.
-
----
-
-## Patent Grant (Apache 2.0)
-
-If you choose the Apache 2.0 license, you also receive a patent grant as
-specified in Section 3 of the Apache License 2.0.
-
----
-
-## Trademark
-
-"Kaldor" and the Kaldor logo are trademarks of the Kaldor Community.
-Use of these marks requires permission. See TRADEMARK.md for details.
-
----
-
-## Compliance
-
-This license is compatible with:
-- ✅ GPL v3 (via Apache 2.0)
-- ✅ LGPL v3
-- ✅ MPL 2.0
-- ✅ AGPL v3
-- ✅ BSD licenses
-- ✅ ISC License
-- ✅ WTFPL
-- ⚠️  Proprietary (allowed, but discouraged for centralization risk)
-
----
-
-## Credits
-
-The Palimpsest License framework was developed by the Rhodium Standard
-Repository project to promote:
-
-1. Community ownership without CLAs
-2. Graduated trust models (TPCF)
-3. Emotional safety in open source
-4. Offline-first, autonomous software
-5. Anti-extractive, pro-community values
-
-Learn more: https://rhodium.sh
-
----
-
-## Questions?
-
-- **Legal**: legal@kaldor.community
-- **Licensing**: license@kaldor.community
-- **Compatibility**: Check with `reuse lint`
-
----
-
-**Version**: Palimpsest v0.8
-**Date**: 2025-11-22
-**SPDX-License-Identifier**: MIT OR Apache-2.0
+================================================================================
+END OF LICENSE
+================================================================================
