@@ -1,8 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 name: Deploy Now
 
 on:
   - push
   - workflow_dispatch
+
+permissions: read-all
 
 jobs:
   deploy-now:
@@ -12,7 +15,7 @@ jobs:
       packages: write
     steps:
       - name: Fetch project data
-        uses: ionos-deploy-now/retrieve-project-info-action@v1
+        uses: ionos-deploy-now/retrieve-project-info-action@bf9d8b47ab70aa3b5972c96aff04ca4fe1e644f0 # v1
         id: project
         with:
           api-key: ${{ secrets.IONOS_API_KEY }}
@@ -21,20 +24,20 @@ jobs:
 
       - name: checkout
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: actions/checkout@v2
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           submodules: 'recursive'
 
       - name: Render templates
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: ionos-deploy-now/template-renderer-action@v1
+        uses: ionos-deploy-now/template-renderer-action@87bab6e3e7f00a0c9ec9ea5f89e6d2fd752e8f3a # v1
         id: template
         with:
           secrets: |
 
       - name: Deploy to IONOS
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: ionos-deploy-now/deploy-to-ionos-action@v1
+        uses: ionos-deploy-now/deploy-to-ionos-action@713803d880d5c7376a7be68c9c7b8c540f5a6e08 # v1
         with:
           project: ${{ secrets.IONOS_PROJECT_ID }}
           branch-id: ${{ steps.project.outputs.branch-id }}

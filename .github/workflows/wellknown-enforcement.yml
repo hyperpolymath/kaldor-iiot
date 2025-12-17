@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 name: Well-Known Standards (RFC 9116 + RSR)
 on:
   push:
@@ -13,32 +14,36 @@ on:
     - cron: '0 9 * * 1'
   workflow_dispatch:
 
+permissions: read-all
+
 jobs:
   validate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-      
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
       - name: RFC 9116 security.txt validation
         run: |
           SECTXT=""
           [ -f ".well-known/security.txt" ] && SECTXT=".well-known/security.txt"
           [ -f "security.txt" ] && SECTXT="security.txt"
-          
+
           if [ -z "$SECTXT" ]; then
             echo "::warning::No security.txt found. See https://github.com/hyperpolymath/well-known-ecosystem"
             exit 0
           fi
-          
+
           # Required: Contact
           grep -q "^Contact:" "$SECTXT" || { echo "::error::Missing Contact field"; exit 1; }
-          
+
           # Required: Expires
           if ! grep -q "^Expires:" "$SECTXT"; then
             echo "::error::Missing Expires field"
             exit 1
           fi
-          
+
           # Check expiry
           EXPIRES=$(grep "^Expires:" "$SECTXT" | cut -d: -f2- | tr -d ' ' | head -1)
           if date -d "$EXPIRES" > /dev/null 2>&1; then
@@ -49,7 +54,7 @@ jobs:
             elif [ $DAYS -lt 30 ]; then
               echo "::warning::security.txt expires in $DAYS days"
             else
-              echo "✅ security.txt valid ($DAYS days)"
+              echo "security.txt valid ($DAYS days)"
             fi
           fi
 
@@ -59,12 +64,12 @@ jobs:
           [ ! -f ".well-known/security.txt" ] && [ ! -f "security.txt" ] && MISSING="$MISSING security.txt"
           [ ! -f ".well-known/ai.txt" ] && MISSING="$MISSING ai.txt"
           [ ! -f ".well-known/humans.txt" ] && MISSING="$MISSING humans.txt"
-          
+
           if [ -n "$MISSING" ]; then
             echo "::warning::Missing RSR recommended files:$MISSING"
             echo "Reference: https://github.com/hyperpolymath/well-known-ecosystem/.well-known/"
           else
-            echo "✅ RSR well-known compliant"
+            echo "RSR well-known compliant"
           fi
 
       - name: Mixed content check
@@ -75,7 +80,7 @@ jobs:
             echo "$MIXED"
             exit 1
           fi
-          echo "✅ No mixed content"
+          echo "No mixed content"
 
       - name: DNS security records check
         if: hashFiles('CNAME') != ''
@@ -84,7 +89,7 @@ jobs:
           if [ -n "$DOMAIN" ]; then
             echo "Checking DNS for $DOMAIN..."
             # CAA record
-            dig +short CAA "$DOMAIN" | grep -q "issue" && echo "✅ CAA record" || echo "::warning::No CAA record"
+            dig +short CAA "$DOMAIN" | grep -q "issue" && echo "CAA record found" || echo "::warning::No CAA record"
             # DNSSEC
-            dig +dnssec +short "$DOMAIN" | grep -q "RRSIG" && echo "✅ DNSSEC" || echo "::warning::No DNSSEC"
+            dig +dnssec +short "$DOMAIN" | grep -q "RRSIG" && echo "DNSSEC enabled" || echo "::warning::No DNSSEC"
           fi

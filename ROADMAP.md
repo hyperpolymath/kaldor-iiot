@@ -3,9 +3,9 @@
 <!-- SPDX-License-Identifier: MIT OR Apache-2.0 -->
 <!-- SPDX-FileCopyrightText: 2025 Kaldor Community Manufacturing Platform Contributors -->
 
-**Version**: 2.0.0
+**Version**: 2.1.0
 **Status**: Active Development
-**Last Updated**: 2025-11-28
+**Last Updated**: 2025-12-17
 
 ## Vision
 
@@ -24,6 +24,7 @@
 - [x] **Governance Framework**: CURP consensus, quadratic voting ([GOVERNANCE.adoc](GOVERNANCE.adoc))
 - [x] **Security Foundation**: RFC 9116 compliant, `.well-known/` directory
 - [x] **White Paper**: Business case, economics, Kaldor's Law 2 validation
+- [x] **CI/CD Security Hardening**: SHA-pinned actions, SPDX headers, least-privilege permissions
 - [ ] **Nix Reproducible Builds**: `nix flake check` passes
 - [ ] **CRDT Implementation**: Automerge for offline-first
 - [ ] **Deno Backend v1.0**: HTTP server, MQTT broker, TimescaleDB integration
@@ -232,6 +233,43 @@
 
 ---
 
+## CI/CD Security Infrastructure
+
+All GitHub workflows now implement OSSF Scorecard-aligned security practices:
+
+### Implemented (v2.1.0)
+
+| Security Control | Status | Details |
+|-----------------|--------|---------|
+| SHA-pinned actions | Complete | All 14 workflows use commit SHA instead of version tags |
+| SPDX license headers | Complete | AGPL-3.0-or-later on all workflow files |
+| Least-privilege permissions | Complete | `permissions: read-all` with job-level overrides |
+| Dependabot integration | Complete | Weekly updates for GitHub Actions, npm, pip, nix |
+| OSSF Scorecard | Complete | Weekly security analysis with SARIF upload |
+| CodeQL analysis | Complete | JavaScript/TypeScript + Python scanning |
+| Secrets scanning | Complete | TruffleHog integration for PR scanning |
+| Workflow linter | Complete | Automated enforcement of security standards |
+
+### Workflows Secured
+
+- `ci-cd.yml` - Main build/test/deploy pipeline
+- `deploy-now.yaml` - IONOS deployment
+- `codeql.yml` - Security scanning
+- `scorecard.yml` - OSSF supply chain security
+- `quality.yml` - Code quality checks
+- `security-policy.yml` - Security policy enforcement
+- `container-policy.yml` - Container image policy
+- `language-policy.yml` - Language restrictions
+- `rsr-antipattern.yml` - RSR compliance
+- `ts-blocker.yml` - TypeScript migration blocker
+- `guix-nix-policy.yml` - Package management policy
+- `wellknown-enforcement.yml` - RFC 9116 compliance
+- `workflow-linter.yml` - Workflow security validation
+- `jekyll-gh-pages.yml` - GitHub Pages deployment
+- `mirror.yml` - GitLab/Bitbucket mirroring
+
+---
+
 ## Success Metrics
 
 ### Technical Metrics
@@ -320,7 +358,8 @@ Expected forks/derivatives:
 |---------|------|---------|
 | 1.0.0 | 2025-11-22 | Initial architecture, RSR Bronze |
 | 2.0.0 | 2025-11-28 | Complete rewrite: Deno + ReScript + WASM, RSR Gold |
-| 2.1.0 | TBD | ReScript frontend v1.0, ESP32 firmware v1.0 |
+| 2.1.0 | 2025-12-17 | CI/CD security hardening: SHA-pinned actions, SPDX headers, permissions |
+| 2.2.0 | TBD | ReScript frontend v1.0, ESP32 firmware v1.0 |
 | 3.0.0 | TBD | Platform cooperative launch, 100 nodes |
 | 4.0.0 | TBD | 500 nodes, cross-cluster coordination |
 
