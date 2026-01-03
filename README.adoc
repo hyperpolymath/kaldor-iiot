@@ -1,8 +1,10 @@
+image:https://img.shields.io/badge/License-MPL_2.0-blue.svg[MPL-2.0,link="https://opensource.org/licenses/MPL-2.0"]
+image:https://img.shields.io/badge/Philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
+
 // SPDX-License-Identifier: MIT OR Apache-2.0
 // SPDX-FileCopyrightText: 2025 Kaldor Community Manufacturing Platform Contributors
 = Kaldor IIoT: Hyperlocal Community Manufacturing Platform
 
-image:https://img.shields.io/badge/license-AGPL--3.0-blue.svg[AGPL-3.0,link="https://www.gnu.org/licenses/agpl-3.0"] image:https://img.shields.io/badge/philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
 :toc: left
 :toclevels: 3
 :icons: font
@@ -12,7 +14,6 @@ image:https://img.shields.io/badge/license-AGPL--3.0-blue.svg[AGPL-3.0,link="htt
 :license: Palimpsest v0.8 (MIT OR Apache-2.0)
 
 image:https://img.shields.io/badge/RSR-Gold-FFD700[RSR Gold Compliant]
-image:https://img.shields.io/badge/License-Palimpsest%20v0.8-blue[License]
 image:https://img.shields.io/badge/Offline--First-CRDT-green[Offline-First]
 image:https://img.shields.io/badge/Type--Safe-ReScript%20%2B%20Rust-orange[Type-Safe]
 
