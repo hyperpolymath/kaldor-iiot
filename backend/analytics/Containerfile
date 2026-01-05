@@ -1,29 +1,30 @@
-FROM python:3.11-slim
+# SPDX-License-Identifier: MIT OR AGPL-3.0-or-later
+# SPDX-FileCopyrightText: 2025 Kaldor Community Manufacturing Platform Contributors
+# Kaldor IIoT Analytics Service - Julia Container
+
+FROM julia:1.10-bookworm
 
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apk add --no-cache -y \
-    gcc \
-    g++ \
-    libpq-dev \
+# Install system dependencies for LibPQ
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
-COPY requirements.txt .
+# Copy project files
+COPY Project.toml .
+COPY src/ src/
+COPY main.jl .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
-COPY . .
+# Install Julia dependencies
+RUN julia --project=. -e 'using Pkg; Pkg.instantiate(); Pkg.precompile()'
 
 # Expose port
 EXPOSE 5000
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=40s \
-  CMD python -c "import requests; requests.get('http://localhost:5000/health')"
+HEALTHCHECK --interval=30s --timeout=3s --start-period=60s \
+  CMD julia -e 'using HTTP; HTTP.get("http://localhost:5000/health")' || exit 1
 
 # Start application
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--timeout", "120", "app:app"]
+CMD ["julia", "--project=.", "main.jl"]
