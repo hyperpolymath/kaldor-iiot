@@ -1,9 +1,12 @@
-image:https://img.shields.io/badge/License-MPL_2.0-blue.svg[MPL-2.0,link="https://opensource.org/licenses/MPL-2.0"]
+image:https://img.shields.io/badge/license-PMPL--1.0-blue.svg[License,link="https://github.com/hyperpolymath/palimpsest-license"]
 image:https://img.shields.io/badge/Philosophy-Palimpsest-purple.svg[Palimpsest,link="https://github.com/hyperpolymath/palimpsest-licence"]
 
-// SPDX-License-Identifier: MIT OR Apache-2.0
+// SPDX-License-Identifier: PMPL-1.0 OR PMPL-1.0
 // SPDX-FileCopyrightText: 2025 Kaldor Community Manufacturing Platform Contributors
 = Kaldor IIoT: Hyperlocal Community Manufacturing Platform
+
+
+
 
 :toc: left
 :toclevels: 3
@@ -11,7 +14,7 @@ image:https://img.shields.io/badge/Philosophy-Palimpsest-purple.svg[Palimpsest,l
 :source-highlighter: rouge
 :version: 2.0.0
 :status: Active Development
-:license: Palimpsest v0.8 (MIT OR Apache-2.0)
+:license: Palimpsest v0.8 (PMPL-1.0 OR PMPL-1.0)
 
 image:https://img.shields.io/badge/RSR-Gold-FFD700[RSR Gold Compliant]
 image:https://img.shields.io/badge/Offline--First-CRDT-green[Offline-First]
@@ -231,15 +234,15 @@ See link:docs/white-paper/KALDOR_WHITE_PAPER.md[White Paper] for full financial 
 
 == License
 
-This project is licensed under the **Palimpsest License v0.8** (dual MIT OR Apache-2.0 with community ownership principles).
+This project is licensed under the **Palimpsest License v0.8** (dual PMPL-1.0 OR PMPL-1.0 with community ownership principles).
 
-* **Code**: MIT OR Apache-2.0 (your choice)
-* **Documentation**: CC-BY-SA-4.0
+* **Code**: PMPL-1.0 OR PMPL-1.0 (your choice)
+* **Documentation**: PMPL-1.0-4.0
 * **Hardware**: CERN-OHL-S-2.0 (strongly reciprocal)
 
 See link:LICENSE.txt[LICENSE.txt] for full text and link:docs/licenses/[docs/licenses/] for individual licenses.
 
-**SPDX-License-Identifier**: `MIT OR Apache-2.0`
+**SPDX-License-Identifier**: `PMPL-1.0 OR PMPL-1.0`
 
 == Contributing
 
