@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT OR Apache-2.0
+// SPDX-License-Identifier: PMPL-1.0-or-later
 // SPDX-FileCopyrightText: 2025 Kaldor Community Manufacturing Platform Contributors
 = Contributing to Kaldor IIoT
 :toc: left
@@ -212,7 +212,7 @@ Every source file MUST have SPDX headers:
 
 [source,typescript]
 ----
-// SPDX-License-Identifier: MIT OR Apache-2.0
+// SPDX-License-Identifier: PMPL-1.0-or-later
 // SPDX-FileCopyrightText: 2025 Your Name <your.email@example.com>
 
 export function myFunction() {
