@@ -1,0 +1,10 @@
+{
+  "name": "kaldor-iiot-frontend",
+  "sources": [{"dir": "src", "subdirs": true}],
+  "package-specs": [{"module": "es6", "in-source": true}],
+  "suffix": ".res.js",
+  "dependencies": ["@rescript/core", "@rescript/react"],
+  "bs-dependencies": ["@rescript/core", "@rescript/react"],
+  "reason": {"react-jsx": 3},
+  "jsx": {"version": 4, "mode": "automatic"}
+}
