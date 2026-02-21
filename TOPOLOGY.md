@@ -1,0 +1,98 @@
+<!-- SPDX-License-Identifier: PMPL-1.0-or-later -->
+<!-- TOPOLOGY.md — Project architecture map and completion dashboard -->
+<!-- Last updated: 2026-02-19 -->
+
+# Kaldor IIoT — Project Topology
+
+## System Architecture
+
+```
+                        ┌─────────────────────────────────────────┐
+                        │              COMMUNITY MAKERS           │
+                        │        (Mobile App / Web Dashboard)     │
+                        └───────────────────┬─────────────────────┘
+                                            │
+                                            ▼
+                        ┌─────────────────────────────────────────┐
+                        │           APPLICATION LAYER             │
+                        │  ┌───────────┐  ┌───────────────────┐  │
+                        │  │ ReScript  │  │  Deno Backend     │  │
+                        │  │ Frontend  │  │  (Oak / WASM)     │  │
+                        │  └─────┬─────┘  └────────┬──────────┘  │
+                        └────────│─────────────────│──────────────┘
+                                 │                 │
+                                 ▼                 ▼
+                        ┌─────────────────────────────────────────┐
+                        │           IOT MESH (MATTER)             │
+                        │    (Thread, ESP32-C6 RISC-V Edge)       │
+                        │  ┌───────────┐  ┌───────────────────┐  │
+                        │  │ Spinning  │  │  Weaving          │  │
+                        │  │ Node      │  │  Node             │  │
+                        │  └─────┬─────┘  └────────┬──────────┘  │
+                        └────────│─────────────────│──────────────┘
+                                 │                 │
+                                 ▼                 ▼
+                        ┌─────────────────────────────────────────┐
+                        │             DATA LAYER                  │
+                        │  ┌───────────┐  ┌───────────────────┐  │
+                        │  │ Automerge │  │  TimescaleDB      │  │
+                        │  │ (CRDT)    │  │  (Metrics)        │  │
+                        │  └───────────┘  └───────────────────┘  │
+                        └─────────────────────────────────────────┘
+
+                        ┌─────────────────────────────────────────┐
+                        │          REPO INFRASTRUCTURE            │
+                        │  Nix / flake.nix    .machine_readable/  │
+                        │  Justfile / Cargo   0-AI-MANIFEST.a2ml  │
+                        └─────────────────────────────────────────┘
+```
+
+## Completion Dashboard
+
+```
+COMPONENT                          STATUS              NOTES
+─────────────────────────────────  ──────────────────  ─────────────────────────────────
+USER INTERFACES
+  ReScript Frontend                 ██████████ 100%    v2.0 dashboard stable
+  Deno Backend (Oak)                ██████████ 100%    HTTP/WASM integration verified
+  Governance Voting (Quadratic)     ████████░░  80%    Voting scripts active
+
+FIRMWARE & EDGE
+  ESP32-C6 Firmware (Zig)           ████████░░  80%    RISC-V v1.0 in progress
+  Matter 1.2+ Integration           ██████░░░░  60%    Thread mesh testing
+  3D Weave System                   ████░░░░░░  40%    Pattern gen beta
+
+DATA & CONSENSUS
+  Automerge CRDTs                   ██████████ 100%    Offline-first state stable
+  TimescaleDB Schema                ██████████ 100%    Production metrics verified
+  CURP Consensus                    ████████░░  80%    Wait-free primitives refined
+
+REPO INFRASTRUCTURE
+  Nix Development Env               ██████████ 100%    Reproducible builds verified
+  Justfile                          ██████████ 100%    Standard build/deploy tasks
+  .machine_readable/                ██████████ 100%    STATE tracking active
+
+─────────────────────────────────────────────────────────────────────────────
+OVERALL:                            ████████░░  ~80%   v2.0.0 Active Development
+```
+
+## Key Dependencies
+
+```
+Matter Mesh ──────► Deno Backend ──────► Automerge ──────► ReScript UI
+     │                 │                   │                 │
+     ▼                 ▼                   ▼                 ▼
+RISC-V Edge ──────► WASM Logic ───────► TimescaleDB ───► Governance
+```
+
+## Update Protocol
+
+This file is maintained by both humans and AI agents. When updating:
+
+1. **After completing a component**: Change its bar and percentage
+2. **After adding a component**: Add a new row in the appropriate section
+3. **After architectural changes**: Update the ASCII diagram
+4. **Date**: Update the `Last updated` comment at the top of this file
+
+Progress bars use: `█` (filled) and `░` (empty), 10 characters wide.
+Percentages: 0%, 10%, 20%, ... 100% (in 10% increments).

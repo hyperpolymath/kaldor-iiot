@@ -278,3 +278,8 @@ See link:ROADMAP.md[ROADMAP.md] for detailed timeline and EOL planning.
 **Last Updated**: 2025-11-28
 
 _"Decentralizing production, one spare room at a time."_
+
+
+== Architecture
+
+See link:TOPOLOGY.md[TOPOLOGY.md] for a visual architecture map and completion dashboard.
