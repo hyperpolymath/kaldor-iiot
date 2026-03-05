@@ -51,3 +51,8 @@ show-drv:
 # All checks before commit
 pre-commit: check
     @echo "All checks passed!"
+
+# [AUTO-GENERATED] Multi-arch / RISC-V target
+build-riscv:
+	@echo "Building for RISC-V..."
+	cross build --target riscv64gc-unknown-linux-gnu
