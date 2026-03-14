@@ -6,29 +6,29 @@
 [source,bibtex]
 ----
 @software{kaldor-iiot_2025,
-  author = {Polymath, Hyper},
+  author = {Jewell, Jonathan D.A.},
   title = {Kaldor-IIoT},
-  year = {2025},
+  year = {2026},
   url = {https://github.com/hyperpolymath/Kaldor-IIoT},
-  license = {AGPL-3.0-or-later}
+  license = {PMPL-1.0-or-later}
 }
 ----
 
 == Harvard Style
 
-Polymath, H. (2025) _Kaldor-IIoT_ [Computer software]. Available at: https://github.com/hyperpolymath/Kaldor-IIoT
+Jewell, J.D.A. (2026) _Kaldor-IIoT_ [Computer software]. Available at: https://github.com/hyperpolymath/Kaldor-IIoT
 
 == OSCOLA
 
-Hyper Polymath, 'Kaldor-IIoT' (2025) <https://github.com/hyperpolymath/Kaldor-IIoT>
+Jonathan D.A. Jewell, 'kaldor-iiot' (2026) <https://github.com/hyperpolymath/Kaldor-IIoT>
 
 == MLA
 
-Polymath, Hyper. "Kaldor-IIoT." 2025, github.com/hyperpolymath/Kaldor-IIoT.
+Jewell, Jonathan D.A. "kaldor-iiot." 2026, github.com/hyperpolymath/Kaldor-IIoT.
 
 == APA 7
 
-Polymath, H. (2025). _Kaldor-IIoT_ [Computer software]. GitHub. https://github.com/hyperpolymath/Kaldor-IIoT
+Jewell, J.D.A. (2026). _Kaldor-IIoT_ [Computer software]. GitHub. https://github.com/hyperpolymath/Kaldor-IIoT
 
 == See Also
 
