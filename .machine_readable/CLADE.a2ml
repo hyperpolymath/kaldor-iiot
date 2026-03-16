@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+# Clade declaration — part of the gv-clade-index registry
+# See: https://github.com/hyperpolymath/gv-clade-index
+
+[identity]
+uuid = "a6c5b766-2ee7-5350-9d87-2daece5fceb1"
+primary-forge = "github"
+primary-owner = "hyperpolymath"
+canonical-name = "kaldor-iiot"
+prefixed-name = "ix-kaldor-iiot"
+
+[clade]
+primary = "ix"
+secondary = []
+assigned = "2026-03-16"
+rationale = ""
+
+[forges]
+github = "hyperpolymath/kaldor-iiot"
+gitlab = "hyperpolymath/kaldor-iiot"
+bitbucket = "hyperpolymath/kaldor-iiot"
+
+[lineage]
+type = "standalone"
+parent = "Industrial IoT tooling"
+born = "2026-03-16"
