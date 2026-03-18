@@ -38,4 +38,5 @@ jobs:
           api-key: ${{ secrets.IONOS_API_KEY }}
           dist-folder: dist
           runtime-placeholder-files: ${{ steps.template.outputs.runtime-placeholder-files }}
-permissions: read-all
+permissions:
+  contents: read
