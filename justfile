@@ -51,3 +51,7 @@ show-drv:
 # All checks before commit
 pre-commit: check
     @echo "All checks passed!"
+
+# Run panic-attacker pre-commit scan
+assail:
+    @command -v panic-attack >/dev/null 2>&1 && panic-attack assail . || echo "panic-attack not found — install from https://github.com/hyperpolymath/panic-attacker"
