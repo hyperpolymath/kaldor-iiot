@@ -11,7 +11,7 @@ jobs:
       packages: write
     steps:
       - name: Fetch project data
-        uses: ionos-deploy-now/retrieve-project-info-action@v1
+        uses: ionos-deploy-now/retrieve-project-info-action@cfc24ae16a455af73305ee65c853ec23dddcd11b # v1
         id: project
         with:
           api-key: ${{ secrets.IONOS_API_KEY }}
@@ -24,13 +24,13 @@ jobs:
           submodules: 'recursive'
       - name: Render templates
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: ionos-deploy-now/template-renderer-action@v1
+        uses: ionos-deploy-now/template-renderer-action@f97139e1583a2a88352a1505bb86dd281538faf2 # v1
         id: template
         with:
           secrets: ""
       - name: Deploy to IONOS
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: ionos-deploy-now/deploy-to-ionos-action@v1
+        uses: ionos-deploy-now/deploy-to-ionos-action@e77742b4e1d0a3bec52b0cb346da05b6d76ca23a # v1
         with:
           project: ${{ secrets.IONOS_PROJECT_ID }}
           branch-id: ${{ steps.project.outputs.branch-id }}
