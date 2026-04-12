@@ -34,7 +34,7 @@ pub const OtaError = enum {
 pub const OtaUpdater = struct {
     device_id: []const u8,
     state: OtaState = .idle,
-    error: OtaError = .none,
+    last_error: OtaError = .none,
     progress: u8 = 0,
     current_url: ?[]const u8 = null,
     bytes_received: usize = 0,
@@ -63,7 +63,7 @@ pub const OtaUpdater = struct {
         self.state = .downloading;
         self.progress = 0;
         self.bytes_received = 0;
-        self.error = .none;
+        self.last_error =.none;
 
         if (builtin.os.tag == .freestanding) {
             // ESP32: Start OTA update
@@ -97,7 +97,7 @@ pub const OtaUpdater = struct {
                     } else if (status < 0) {
                         // Error
                         self.state = .error_state;
-                        self.error = .download_failed;
+                        self.last_error =.download_failed;
                         hal.print("OTA: Download failed\n");
                     }
                 } else {
@@ -115,7 +115,7 @@ pub const OtaUpdater = struct {
                         hal.print("OTA: Verification passed, installing...\n");
                     } else {
                         self.state = .error_state;
-                        self.error = .verify_failed;
+                        self.last_error =.verify_failed;
                         hal.print("OTA: Verification failed\n");
                     }
                 } else {
@@ -131,7 +131,7 @@ pub const OtaUpdater = struct {
                         hal.restart();
                     } else {
                         self.state = .error_state;
-                        self.error = .install_failed;
+                        self.last_error =.install_failed;
                     }
                 } else {
                     self.state = .complete;
@@ -164,7 +164,7 @@ pub const OtaUpdater = struct {
 
     /// Get last error
     pub fn getError(self: *const Self) OtaError {
-        return self.error;
+        return self.last_error;
     }
 
     /// Check if update is in progress

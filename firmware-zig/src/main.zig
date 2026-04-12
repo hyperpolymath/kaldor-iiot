@@ -1,18 +1,16 @@
 // SPDX-License-Identifier: PMPL-1.0-or-later
 
-/**
- * Kaldor IIoT — Back Beam Width (BBW) Sensor Firmware.
- *
- * This Zig module implements the firmware for an ESP32-based monitoring 
- * system. It is designed for high-reliability industrial environments, 
- * featuring local data buffering, watchdog enforcement, and secure telemetry.
- *
- * SUBSYSTEMS:
- * 1. SENSORS: High-frequency (100Hz) acquisition of physical metrics.
- * 2. BUFFER: Circular memory buffer to prevent data loss during WiFi outages.
- * 3. TELEMETRY: MQTT client for publishing processed metrics and alerts.
- * 4. MAINTENANCE: OTA (Over-The-Air) update listener for remote management.
- */
+// Kaldor IIoT — Back Beam Width (BBW) Sensor Firmware.
+//
+// This Zig module implements the firmware for an ESP32-based monitoring
+// system. It is designed for high-reliability industrial environments,
+// featuring local data buffering, watchdog enforcement, and secure telemetry.
+//
+// SUBSYSTEMS:
+// 1. SENSORS: High-frequency (100Hz) acquisition of physical metrics.
+// 2. BUFFER: Circular memory buffer to prevent data loss during WiFi outages.
+// 3. TELEMETRY: MQTT client for publishing processed metrics and alerts.
+// 4. MAINTENANCE: OTA (Over-The-Air) update listener for remote management.
 
 const std = @import("std");
 const config = @import("config.zig");

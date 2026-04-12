@@ -236,7 +236,7 @@ pub const SensorManager = struct {
     }
 
     /// Calculate signal quality based on distance
-    fn calculateQuality(self: *Self, distance: f32) u8 {
+    fn calculateQuality(self: *const Self, distance: f32) u8 {
         _ = self;
 
         // Quality degrades with distance and noise
@@ -263,14 +263,14 @@ pub const SensorManager = struct {
 // ============================================================================
 
 test "SensorManager initialization" {
-    var sm = SensorManager.init();
+    const sm = SensorManager.init();
     // begin() would fail without hardware, but init() should work
     try std.testing.expect(!sm.ultrasonic_initialized);
     try std.testing.expect(!sm.dht_initialized);
 }
 
 test "quality calculation" {
-    var sm = SensorManager.init();
+    const sm = SensorManager.init();
     try std.testing.expectEqual(@as(u8, 0), sm.calculateQuality(10));
     try std.testing.expectEqual(@as(u8, 95), sm.calculateQuality(150));
     try std.testing.expectEqual(@as(u8, 0), sm.calculateQuality(500));
