@@ -77,12 +77,16 @@ gerber files committed. Physical board availability unconfirmed.
 # CURRENT BLOCKERS
 # ------------------------------------------------------------------
 
+[decisions]
+# DECLARED 2026-04-12
+backend-strategy = "DECOMMISSION backend/api (Node.js). backend-deno (Deno/ReScript) is canonical. backend/api is legacy only — no new development."
+hardware-availability = "CONFIRMED — physical BBW board available. ESP-IDF ABI/FFI bindings can now be implemented."
+
 [blockers]
 items = [
-  "Jonathan decision: decommission backend/api (Node.js) or keep dual stack",
-  "Physical ESP32 BBW board required for hardware integration tests",
-  "ESP-IDF FFI bindings not yet implemented (HAL externs are stubs)",
+  "ESP-IDF FFI bindings not yet implemented (HAL externs are stubs — unblocked by hardware confirmation)",
   "CRDT (Automerge) layer not yet deployed in backend-deno",
+  "backend/api decommission requires cleanup commit to remove Node.js code",
 ]
 
 # ------------------------------------------------------------------
