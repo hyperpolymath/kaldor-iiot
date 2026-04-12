@@ -1,9 +1,95 @@
 # SPDX-License-Identifier: PMPL-1.0-or-later
-# META.a2ml — Project meta-information
-# Converted from META.scm on 2026-03-15
+# Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+# META.a2ml — Architecture decisions and development practices
+# Originally converted from META.scm on 2026-03-15
+# Updated 2026-04-12
 
 [metadata]
 project = "kaldor-iiot"
 author = "Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>"
 license = "PMPL-1.0-or-later"
 standard = "RSR 2026"
+last-updated = "2026-04-12"
+
+# ------------------------------------------------------------------
+# ARCHITECTURE DECISIONS (ADRs)
+# ------------------------------------------------------------------
+
+[[adr]]
+id = "ADR-001"
+title = "Zig for firmware instead of C++ or Rust"
+status = "accepted"
+date = "2025-11-22"
+rationale = """
+Zig 0.15+ provides zero-cost abstractions, comptime, and cross-compilation
+without a C++ toolchain. The freestanding target + builtin.os.tag pattern
+gives clean simulation/production bifurcation. Rust was considered but
+ESP32 Xtensa toolchain support is less mature than Zig's.
+"""
+
+[[adr]]
+id = "ADR-002"
+title = "Deno + ReScript backend, not Node.js + TypeScript"
+status = "accepted"
+date = "2025-11-22"
+rationale = """
+Node.js and TypeScript are banned per Hyperpolymath RSR language policy.
+Deno provides a secure runtime with first-class TypeScript (via JSR),
+but we use ReScript for the application layer to get a sound type system
+without TypeScript. Oak replaces Express.
+"""
+migration-note = "Legacy backend/api (Node.js) pending decommission. ADR-002 is the canonical direction."
+
+[[adr]]
+id = "ADR-003"
+title = "HAL layer uses builtin.os.tag for freestanding/simulation split"
+status = "accepted"
+date = "2025-11-22"
+rationale = """
+src/hal.zig compiles on host by branching on builtin.os.tag == .freestanding.
+This lets all unit tests run on the CI host without an ESP32 cross-compiler,
+while the same source file is used for the actual device firmware. The
+extern fn declarations are only resolved at link time on ESP32.
+"""
+
+[[adr]]
+id = "ADR-004"
+title = "ABI/FFI standard pending — ESP-IDF bindings not yet structured"
+status = "proposed"
+date = "2026-04-12"
+rationale = """
+The Hyperpolymath estate standard requires Idris2 ABI + Zig FFI. The current
+hal.zig uses raw extern fn declarations inline (not in a separate ffi/ layer).
+Full ADR-004 implementation requires:
+  - src/abi/*.idr — Idris2 definitions for ESP-IDF interface
+  - ffi/zig/src/*.zig — C-compatible Zig bindings
+  - generated/abi/*.h — auto-generated headers
+Blocked on: physical board availability + hardware strategy decision.
+"""
+
+# ------------------------------------------------------------------
+# DEVELOPMENT PRACTICES
+# ------------------------------------------------------------------
+
+[practices]
+test-command = "zig build test"
+test-root = "firmware-zig/src/all_tests.zig"
+test-note = "Host-side tests only. Freestanding HAL paths are excluded."
+pre-commit = "panic-attack assail ."
+build-tool = "zig build (firmware), deno task (backend), npm run build (frontend)"
+language-firmware = "Zig 0.15.2"
+language-backend = "ReScript + Deno"
+language-frontend = "ReScript + React 18 + Vite"
+language-analytics = "Julia"
+package-manager-backend = "deno.json (no node_modules)"
+package-manager-frontend = "npm (frontend only, ReScript compile step)"
+
+[banned-patterns]
+items = [
+  "believe_me / assert_total (Idris2 proof debt)",
+  "unsafeCoerce / Obj.magic (ReScript)",
+  "TypeScript files (use ReScript)",
+  "npm for backend runtime deps (use Deno)",
+  "Python anywhere except SaltStack",
+  "Go anywhere",
+]

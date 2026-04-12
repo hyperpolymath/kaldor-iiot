@@ -1,14 +1,104 @@
 # SPDX-License-Identifier: PMPL-1.0-or-later
 # STATE.a2ml — Project state checkpoint
-# Converted from STATE.scm on 2026-03-15
+# Originally converted from STATE.scm on 2026-03-15
+# Updated 2026-04-12
 
 [metadata]
 project = "kaldor-iiot"
 version = "0.1.0"
-last-updated = "2026-03-15"
+last-updated = "2026-04-12"
 status = "active"
 
 [project-context]
 name = "kaldor-iiot"
-completion-percentage = 0
-phase = "In development"
+completion-percentage = 25
+phase = "In development — firmware functional, backends in transition"
+
+# ------------------------------------------------------------------
+# SUBSYSTEM STATUS (as of 2026-04-12)
+# ------------------------------------------------------------------
+
+[subsystem.firmware-zig]
+status = "functional"
+completion = 70
+notes = """
+Migrated to Zig 0.15.2 on 2026-04-12 (commit e131a73).
+10/10 tests passing on host (buffer, sensors, mqtt, ota, wifi).
+HAL layer is freestanding-only: extern fns compiled to stubs on host,
+real ESP-IDF bindings needed for physical flash+run.
+Pending: hardware availability (ESP32 BBW board), ESP-IDF FFI wiring.
+"""
+
+[subsystem.backend-deno]
+status = "in-progress"
+completion = 40
+notes = """
+Deno/ReScript backend (27 .res files): Auth, Community, Governance,
+Job, Machine, Pattern routes + Oak/Postgres/Redis/MQTT/Matter/OPC-UA
+bindings present. Canonical replacement for backend/api.
+Pending: full integration tests, CRDT layer, production deployment.
+"""
+
+[subsystem.backend-api-legacy]
+status = "deprecated"
+completion = 100
+notes = """
+Node.js/Express backend in backend/api/ (23 .js files). Superseded
+by backend-deno. Violates RSR language policy (npm, JS). Pending
+decommission — awaiting Jonathan's backend strategy decision.
+"""
+
+[subsystem.frontend]
+status = "in-progress"
+completion = 50
+notes = """
+ReScript + React 18 + Vite (49 .res files). Pages: Alerts, Analytics,
+Dashboard, Login, LoomDetail, Settings. Redux store wired.
+Pending: integration with backend-deno API, CRDT state sync.
+"""
+
+[subsystem.analytics-julia]
+status = "stub"
+completion = 10
+notes = """
+Julia analytics package in backend/analytics/. Module skeleton present.
+No defined data-flow integration with backend-deno yet.
+"""
+
+[subsystem.hardware-design]
+status = "documented"
+completion = 30
+notes = """
+Pin assignments and BBW board spec in docs/hardware/. No KiCAD or
+gerber files committed. Physical board availability unconfirmed.
+"""
+
+# ------------------------------------------------------------------
+# CURRENT BLOCKERS
+# ------------------------------------------------------------------
+
+[blockers]
+items = [
+  "Jonathan decision: decommission backend/api (Node.js) or keep dual stack",
+  "Physical ESP32 BBW board required for hardware integration tests",
+  "ESP-IDF FFI bindings not yet implemented (HAL externs are stubs)",
+  "CRDT (Automerge) layer not yet deployed in backend-deno",
+]
+
+# ------------------------------------------------------------------
+# NEXT ACTIONS (Claude-executable, no auth needed)
+# ------------------------------------------------------------------
+
+[next-actions.claude]
+items = [
+  "Implement ESP-IDF ABI bindings in src/abi/ once hardware strategy confirmed",
+  "Wire Julia analytics data flow once backend-deno API shape is stable",
+  "Add Zig-format integration tests for buffer/sensor pipeline",
+]
+
+[next-actions.jonathan]
+items = [
+  "Decide backend strategy: deprecate backend/api or define which is production",
+  "Confirm ESP32 board availability for hardware-in-the-loop testing",
+  "Run firmware flash + monitor against physical BBW board once ESP-IDF wired",
+]

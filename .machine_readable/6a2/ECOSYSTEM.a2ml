@@ -1,10 +1,51 @@
 # SPDX-License-Identifier: PMPL-1.0-or-later
-# ECOSYSTEM.a2ml — Ecosystem position
-# Converted from ECOSYSTEM.scm on 2026-03-15
+# ECOSYSTEM.a2ml — Ecosystem position and relationships
+# Originally converted from ECOSYSTEM.scm on 2026-03-15
+# Updated 2026-04-12
 
 [metadata]
 project = "kaldor-iiot"
 ecosystem = "hyperpolymath"
+last-updated = "2026-04-12"
 
 [position]
 type = "component"
+domain = "industrial-iot"
+layer = "edge-device + platform"
+description = """
+IIoT implementation for the Kaldor loom's BBW (Back Beam Width) board.
+Provides real-time sensor acquisition (100Hz), local buffering, MQTT
+telemetry, OTA updates, and a Deno/ReScript cloud platform for fleet
+management, analytics, and community governance.
+"""
+
+[hardware-target]
+primary = "ESP32 (Xtensa LX6)"
+secondary = "ESP32-C3/C6 (RISC-V) — see firmware-riscv/"
+firmware-language = "Zig 0.15.2"
+hal-abstraction = "src/hal.zig (freestanding + simulation dual mode)"
+
+[platform-stack]
+firmware = "Zig (firmware-zig/)"
+backend = "Deno + ReScript (backend-deno/) [canonical]"
+backend-legacy = "Node.js/Express (backend/api/) [pending deprecation]"
+frontend = "ReScript + React 18 + Vite (frontend/)"
+analytics = "Julia (backend/analytics/)"
+database = "TimescaleDB + Automerge CRDTs (planned)"
+broker = "Mosquitto MQTT (infrastructure/mosquitto/)"
+protocols = ["MQTT", "OPC-UA", "Matter", "Modbus"]
+
+[related-projects]
+items = [
+  { name = "boj-server", relationship = "potential-consumer", note = "BoJ cartridge for IIoT data queries" },
+  { name = "nextgen-databases/verisimdb", relationship = "infrastructure", note = "VeriSimDB instance for per-project persistence" },
+  { name = "gossamer", relationship = "potential-consumer", note = "PanLL panel for loom monitoring dashboard" },
+  { name = "standards/a2ml", relationship = "format-standard", note = "A2ML used for .machine_readable/ checkpoint files" },
+  { name = "idaptik", relationship = "sibling-application", note = "Shares Deno/ReScript + community governance patterns" },
+]
+
+[compliance]
+rsr-level = "Bronze (achieved)"
+rsr-target = "Gold"
+abi-ffi-standard = "pending — HAL uses extern fn stubs; full Idris2-ABI + Zig-FFI layer planned"
+license = "PMPL-1.0-or-later (MPL-2.0 legal fallback)"

@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-04-12
+
+### Changed
+- **firmware-zig**: Migrated to Zig 0.15.2 API (`root_module` + `b.createModule()`, `b.graph.host`)
+- **firmware-zig**: Renamed `OtaUpdater.error` field to `last_error` (`error` is a Zig keyword)
+- **firmware-zig**: `calculateQuality` signature `*Self` → `*const Self` (does not mutate)
+- **firmware-zig**: Block comment `/** */` → `//` line comments (Zig has no block comments)
+
+### Added
+- **firmware-zig**: `src/all_tests.zig` — dedicated host-side test root that imports all
+  submodules with tests (buffer, sensors, mqtt, ota, wifi) while skipping `main.zig`'s
+  freestanding-only `extern fn` stubs
+- `.gitignore`: `**/.zig-cache/` and `**/zig-out/` patterns
+- `.machine_readable/6a2/`: Full content expansion for STATE, META, ECOSYSTEM, PLAYBOOK,
+  NEUROSYM — all previously stub-only
+
+### Fixed
+- **firmware-zig**: All 10 host unit tests now pass on Zig 0.15.2 (previously failed to compile)
+- **NEUROSYM.a2ml**: Removed stale `report-format = "logtalk"` (Logtalk removed from Hypatia 2026-04-12)
+
+
+
 ### Added
 - RSR Framework compliance (targeting Platinum level)
 - Tri-Perimeter Contribution Framework (TPCF)
@@ -165,10 +187,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for changelog guidelines.
 
 ## Links
 
-- **Repository**: https://github.com/Hyperpolymath/Kaldor-IIoT
-- **Releases**: https://github.com/Hyperpolymath/Kaldor-IIoT/releases
-- **Security Advisories**: https://github.com/Hyperpolymath/Kaldor-IIoT/security/advisories
-- **Issue Tracker**: https://github.com/Hyperpolymath/Kaldor-IIoT/issues
+- **Repository**: https://github.com/hyperpolymath/kaldor-iiot
+- **Releases**: https://github.com/hyperpolymath/kaldor-iiot/releases
+- **Security Advisories**: https://github.com/hyperpolymath/kaldor-iiot/security/advisories
+- **Issue Tracker**: https://github.com/hyperpolymath/kaldor-iiot/issues
 
 ---
 

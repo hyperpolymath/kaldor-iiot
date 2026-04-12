@@ -77,3 +77,7 @@ htmlcov/
 /tmp/
 *.tmp
 *.bak
+
+# Zig
+**/.zig-cache/
+**/zig-out/

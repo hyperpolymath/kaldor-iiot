@@ -1,23 +1,87 @@
 # SPDX-License-Identifier: PMPL-1.0-or-later
-# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+# Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 #
-# PLAYBOOK.a2ml — Operational playbook
+# PLAYBOOK.a2ml — Operational runbook
 # Runbooks, incident response, deployment procedures.
 
 [metadata]
 version = "0.1.0"
-last-updated = "2026-03-16"
+last-updated = "2026-04-12"
 
-[deployment]
-# method = "gitops"
-# target = "container"
+# ------------------------------------------------------------------
+# FIRMWARE BUILD + FLASH
+# ------------------------------------------------------------------
+
+[firmware.host-tests]
+command = "cd firmware-zig && zig build test"
+expected = "10/10 tests pass (buffer, sensors, mqtt, ota, wifi)"
+note = "all_tests.zig is the host-side root; main.zig excluded (freestanding externs)"
+
+[firmware.esp32-flash]
+status = "pending — requires physical ESP32 board + ESP-IDF toolchain"
+steps = [
+  "Install ESP-IDF (idf.py or Zig cross-compile toolchain)",
+  "Set target: zig build -Dtarget=xtensa-freestanding-none",
+  "Flash: esptool.py write_flash 0x10000 zig-out/bin/kaldor-bbw-firmware.bin",
+  "Monitor: idf.py monitor",
+]
+
+# ------------------------------------------------------------------
+# BACKEND DEVELOPMENT
+# ------------------------------------------------------------------
+
+[backend-deno.dev]
+command = "cd backend-deno && deno task dev"
+note = "Canonical backend. Oak framework, ReScript compiled to JS."
+
+[backend-deno.test]
+command = "cd backend-deno && deno task test"
+
+[backend-api-legacy.note]
+status = "deprecated — do not develop further"
+decommission = "pending Jonathan's backend strategy decision"
+
+# ------------------------------------------------------------------
+# FRONTEND
+# ------------------------------------------------------------------
+
+[frontend.dev]
+command = "cd frontend && npm run dev"
+note = "ReScript → JS compiled by rescript, served by Vite"
+
+[frontend.build]
+command = "cd frontend && npm run build"
+
+# ------------------------------------------------------------------
+# FULL STACK (docker-compose)
+# ------------------------------------------------------------------
+
+[full-stack]
+command = "docker-compose up"
+note = "Brings up Mosquitto, TimescaleDB, backend-deno, frontend. Legacy Node backend excluded."
+
+# ------------------------------------------------------------------
+# INCIDENT RESPONSE
+# ------------------------------------------------------------------
 
 [incident-response]
-# 1. Check .machine_readable/STATE.a2ml for current status
-# 2. Review recent commits and CI results
-# 3. Run just validate to check compliance
+steps = [
+  "Check .machine_readable/6a2/STATE.a2ml for current subsystem status",
+  "Review recent commits: git log --oneline -10",
+  "Run firmware tests: cd firmware-zig && zig build test",
+  "Run pre-commit checks: panic-attack assail .",
+  "Check CI status on GitHub Actions",
+]
 
-[release-process]
-# 1. Update version in STATE.a2ml, META.a2ml
-# 2. Run just quality (format, lint, test)
-# 3. Tag and push
+# ------------------------------------------------------------------
+# RELEASE PROCESS
+# ------------------------------------------------------------------
+
+[release]
+steps = [
+  "Update version in STATE.a2ml and META.a2ml",
+  "Update CHANGELOG.md (add dated release section)",
+  "Run: just quality  (format + lint + test)",
+  "Tag: git tag -s v<version> -m 'Release v<version>'",
+  "Push tag: git push origin v<version>",
+]

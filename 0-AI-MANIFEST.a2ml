@@ -48,23 +48,27 @@ Bot-specific instructions for:
 
 ## REPOSITORY STRUCTURE
 
-<!-- CUSTOMIZE THIS SECTION FOR YOUR REPO -->
-
 This repo contains:
 
 ```
 kaldor-iiot/
-├── 0-AI-MANIFEST.a2ml         # THIS FILE (start here)
-├── README.md                   # Project overview
-├── [your source files]         # Main code
-├── .machine_readable/          # SCM files (6 files)
-│   ├── .machine_readable/6a2/STATE.a2ml
-│   ├── .machine_readable/6a2/META.a2ml
-│   ├── .machine_readable/6a2/ECOSYSTEM.a2ml
-│   ├── .machine_readable/6a2/AGENTIC.a2ml
-│   ├── .machine_readable/6a2/NEUROSYM.a2ml
-│   └── .machine_readable/6a2/PLAYBOOK.a2ml
-└── .bot_directives/            # Bot instructions
+├── 0-AI-MANIFEST.a2ml             # THIS FILE (start here)
+├── firmware-zig/                   # ESP32 firmware (Zig 0.15.2, 10 tests)
+│   ├── src/{main,sensors,mqtt,buffer,wifi,ota,config,hal,all_tests}.zig
+│   └── build.zig
+├── backend-deno/                   # Canonical backend (Deno + ReScript)
+│   ├── bindings/                   # Oak, Postgres, Redis, MQTT, Matter, OPC-UA
+│   └── routes/{Auth,Community,Governance,Job,Machine,Pattern}.res
+├── backend/api/                    # LEGACY Node.js backend — pending deprecation
+├── frontend/                       # ReScript + React 18 + Vite (49 .res files)
+├── backend/analytics/              # Julia analytics package
+├── database/schemas/               # SQL schema definitions
+├── infrastructure/                 # Mosquitto, monitoring
+├── docs/                           # Architecture, hardware, white-paper, compliance
+├── README.adoc                     # Project overview
+├── .machine_readable/              # A2ML checkpoint files (6 files)
+│   └── 6a2/{STATE,META,ECOSYSTEM,AGENTIC,NEUROSYM,PLAYBOOK}.a2ml
+└── .bot_directives/                # Bot instructions
 ```
 
 ## SESSION STARTUP CHECKLIST
@@ -110,7 +114,8 @@ After reading this file, demonstrate understanding by stating:
 ## META
 
 - **Format Version:** 1.0.0
-- **Created:** [DATE]
-- **Maintained By:** [YOUR-NAME/ORG]
+- **Created:** 2025-11-22
+- **Last Updated:** 2026-04-12
+- **Maintained By:** Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 - **License:** PMPL-1.0-or-later
 - **Protocol:** https://github.com/hyperpolymath/0-ai-gatekeeper-protocol
