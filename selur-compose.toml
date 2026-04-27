@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: PMPL-1.0-or-later
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+#
+# Stapeln service definition for kaldor-iiot
+# Migration target: Chainguard base images for api/analytics/frontend
+#
+# Usage:
+#   podman-compose -f selur-compose.toml up -d
+#   just stack-up
+
+[project]
+name = "kaldor-iiot"
+
+[services.timescaledb]
+image = "timescale/timescaledb:latest-pg15"
+restart = "unless-stopped"
+networks = ["kaldor-network"]
+environment = { POSTGRES_DB = "kaldor_iiot", POSTGRES_USER = "kaldor", POSTGRES_PASSWORD = "${DB_PASSWORD:-kaldor_password}" }
+ports = ["5432:5432"]
+volumes = ["timescaledb-data:/var/lib/postgresql/data", "./database/schemas:/docker-entrypoint-initdb.d"]
+healthcheck = { test = ["CMD-SHELL", "pg_isready -U kaldor"], interval = "10s", timeout = "5s", retries = 5 }
+
+[services.redis]
+image = "cgr.dev/chainguard/redis:latest"
+restart = "unless-stopped"
+networks = ["kaldor-network"]
+command = "redis-server --requirepass ${REDIS_PASSWORD:-redis_password}"
+ports = ["6379:6379"]
+volumes = ["redis-data:/data"]
+healthcheck = { test = ["CMD", "redis-cli", "ping"], interval = "10s", timeout = "5s", retries = 5 }
+
+[services.mosquitto]
+image = "eclipse-mosquitto:2"
+restart = "unless-stopped"
+networks = ["kaldor-network"]
+ports = ["1883:1883", "9001:9001"]
+
+[services.api]
+build = { context = ".", dockerfile = "Containerfile.api" }
+restart = "unless-stopped"
+networks = ["kaldor-network"]
+healthcheck = { test = ["CMD", "curl", "-f", "http://localhost:8080/health"], interval = "30s", timeout = "5s", retries = 3 }
+
+[services.analytics]
+build = { context = ".", dockerfile = "Containerfile.analytics" }
+restart = "unless-stopped"
+networks = ["kaldor-network"]
+
+[services.frontend]
+build = { context = ".", dockerfile = "Containerfile.frontend" }
+restart = "unless-stopped"
+networks = ["kaldor-network"]
+ports = ["3000:3000"]
+
+[services.nginx]
+image = "cgr.dev/chainguard/nginx:latest"
+restart = "unless-stopped"
+networks = ["kaldor-network"]
+ports = ["80:80", "443:443"]
+
+[services.prometheus]
+image = "prom/prometheus:latest"
+restart = "unless-stopped"
+networks = ["kaldor-network"]
+ports = ["9090:9090"]
+volumes = ["prometheus-data:/prometheus"]
+
+[services.grafana]
+image = "grafana/grafana:latest"
+restart = "unless-stopped"
+networks = ["kaldor-network"]
+ports = ["3001:3000"]
+volumes = ["grafana-data:/var/lib/grafana"]
+
+[volumes]
+timescaledb-data = {}
+redis-data = {}
+prometheus-data = {}
+grafana-data = {}
+
+[networks]
+kaldor-network = { driver = "bridge" }
