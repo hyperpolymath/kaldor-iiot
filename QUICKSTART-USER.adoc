@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 // Template: QUICKSTART-USER.adoc — 5-minute path to working software
 // Replace kaldor-iiot, Kaldor Iiot — See README.adoc for details., just run, Kaldor Iiot started successfully. with actuals
 = kaldor-iiot — Quick Start for Users

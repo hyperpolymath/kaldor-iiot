@@ -423,5 +423,5 @@ See implementation in:
 ---
 
 **Version**: 2.0.0
-**License**: PMPL-1.0-or-later (software) + CC-BY-SA-4.0 (documentation)
+**License**: MPL-2.0 (software) + CC-BY-SA-4.0 (documentation)
 **Last Updated**: 2025-11-22

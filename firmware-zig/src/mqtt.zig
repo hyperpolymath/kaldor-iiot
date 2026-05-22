@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 //! Kaldor IIoT - MQTT Client
 //!
 //! MQTT communication with TLS support for secure telemetry.

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 //! Kaldor IIoT - Hardware Abstraction Layer
 //!
 //! Abstracts ESP32 hardware access for portability and testing.

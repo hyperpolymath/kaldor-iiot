@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 //! Kaldor IIoT - WiFi Management
 //!
 //! Handles WiFi connection, reconnection, and status monitoring.

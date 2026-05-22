@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 // Kaldor IIoT - BBW Sensor Board Firmware (Zig)
 // Build configuration for ESP32 target
 

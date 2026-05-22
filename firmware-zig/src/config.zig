@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: PMPL-1.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 //! Kaldor IIoT - Configuration Constants
 //!
 //! Build-time configuration for the BBW sensor board.

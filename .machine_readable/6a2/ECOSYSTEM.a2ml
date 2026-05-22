@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: MPL-2.0
 # ECOSYSTEM.a2ml — Ecosystem position and relationships
 # Originally converted from ECOSYSTEM.scm on 2026-03-15
 # Updated 2026-04-12
@@ -48,4 +48,4 @@ items = [
 rsr-level = "Bronze (achieved)"
 rsr-target = "Gold"
 abi-ffi-standard = "pending — HAL uses extern fn stubs; full Idris2-ABI + Zig-FFI layer planned"
-license = "PMPL-1.0-or-later (MPL-2.0 legal fallback)"
+license = "MPL-2.0 (MPL-2.0 legal fallback)"
