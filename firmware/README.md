@@ -1,3 +1,7 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+-->
 # Kaldor IIoT - Firmware
 
 ESP32-based firmware for the Back Beam Width (BBW) monitoring sensor board.

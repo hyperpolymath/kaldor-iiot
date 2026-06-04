@@ -1,3 +1,7 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+-->
 # Kaldor IIoT - Hardware Setup Guide
 
 Complete guide for assembling and configuring the BBW sensor board.

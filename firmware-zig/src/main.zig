@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 // Kaldor IIoT — Back Beam Width (BBW) Sensor Firmware.
 //
 // This Zig module implements the firmware for an ESP32-based monitoring

@@ -14,6 +14,7 @@ jobs:
   # Backend API Tests
   backend-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     services:
       postgres:
         image: timescale/timescaledb:latest-pg15
@@ -73,6 +74,7 @@ jobs:
   # Frontend Tests
   frontend-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -99,6 +101,7 @@ jobs:
   # Python Analytics Tests
   analytics-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -124,6 +127,7 @@ jobs:
     needs: [backend-test, frontend-test, analytics-test]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -148,6 +152,7 @@ jobs:
     needs: build-images
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4

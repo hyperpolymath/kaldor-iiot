@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 //! Kaldor IIoT - Hardware Abstraction Layer
 //!
 //! Abstracts ESP32 hardware access for portability and testing.

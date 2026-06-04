@@ -1,6 +1,9 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+-->
 # REVERSIBILITY.md
 
-<!-- SPDX-License-Identifier: MIT OR Apache-2.0 -->
 <!-- SPDX-FileCopyrightText: 2025 Kaldor Community Manufacturing Platform Contributors -->
 
 **Version**: 1.0.0
