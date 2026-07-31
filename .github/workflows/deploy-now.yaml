@@ -19,18 +19,18 @@ jobs:
           service-host: api-eu.ionos.space
       - name: checkout
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
         with:
           submodules: 'recursive'
       - name: Render templates
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: ionos-deploy-now/template-renderer-action@f97139e1583a2a88352a1505bb86dd281538faf2 # v1
+        uses: ionos-deploy-now/template-renderer-action@f90800cda6ff05947f58f27d6f9178c7bbd5180e # v2.2.0
         id: template
         with:
           secrets: ""
       - name: Deploy to IONOS
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: ionos-deploy-now/deploy-to-ionos-action@e77742b4e1d0a3bec52b0cb346da05b6d76ca23a # v1
+        uses: ionos-deploy-now/deploy-to-ionos-action@452884710a8fec9421c32d6c8ab2c69566703b02 # v1
         with:
           project: ${{ secrets.IONOS_PROJECT_ID }}
           branch-id: ${{ steps.project.outputs.branch-id }}
