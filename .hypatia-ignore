@@ -1,0 +1,73 @@
+# Banned-language exemption ledger — hypatia / governance-reusable.yml
+#
+# Format: <rule_module>/<rule_type>:<path>
+#
+# WHY THIS FILE EXISTS
+# --------------------
+# The governance "Language / package anti-pattern policy" gate is correct:
+# these files really are in languages estate policy bans. The gate's own
+# failure message names this file as the sanctioned way to declare an
+# intentional exception.
+#
+# These exemptions HOLD THE LINE WHILE MIGRATION IS IN PROGRESS. Each entry
+# is removed as the matching file is ported or deleted. This follows the
+# precedent set in hyperpolymath/echidna.
+#
+# EVERY PATH IS LISTED INDIVIDUALLY — deliberately. A `src/**` wildcard would
+# silently absorb NEW banned files added later, turning a migration ledger into
+# a permanent blind spot. Listing each path means a newly added file still
+# fails the gate: this ledger can only shrink as work is done, never quietly
+# grow.
+#
+# Inventory taken 2026-08-06 across all 424 estate repositories.
+# Files covered: 49 rescript
+
+cicd_rules/banned_language_file:backend-deno/Main.res
+cicd_rules/banned_language_file:backend-deno/bindings/Bcrypt.res
+cicd_rules/banned_language_file:backend-deno/bindings/Deno.res
+cicd_rules/banned_language_file:backend-deno/bindings/Jose.res
+cicd_rules/banned_language_file:backend-deno/bindings/Matter.res
+cicd_rules/banned_language_file:backend-deno/bindings/Mqtt_Client.res
+cicd_rules/banned_language_file:backend-deno/bindings/Oak.res
+cicd_rules/banned_language_file:backend-deno/bindings/Opcua.res
+cicd_rules/banned_language_file:backend-deno/bindings/Postgres.res
+cicd_rules/banned_language_file:backend-deno/bindings/Redis_Client.res
+cicd_rules/banned_language_file:backend-deno/middleware/Auth.res
+cicd_rules/banned_language_file:backend-deno/middleware/Error.res
+cicd_rules/banned_language_file:backend-deno/middleware/RateLimit.res
+cicd_rules/banned_language_file:backend-deno/routes/AuthRoutes.res
+cicd_rules/banned_language_file:backend-deno/routes/CommunityRoutes.res
+cicd_rules/banned_language_file:backend-deno/routes/GovernanceRoutes.res
+cicd_rules/banned_language_file:backend-deno/routes/JobRoutes.res
+cicd_rules/banned_language_file:backend-deno/routes/MachineRoutes.res
+cicd_rules/banned_language_file:backend-deno/routes/PatternRoutes.res
+cicd_rules/banned_language_file:backend-deno/services/Database.res
+cicd_rules/banned_language_file:backend-deno/services/Logger.res
+cicd_rules/banned_language_file:backend-deno/services/Matter.res
+cicd_rules/banned_language_file:backend-deno/services/Mqtt.res
+cicd_rules/banned_language_file:backend-deno/services/Opcua.res
+cicd_rules/banned_language_file:backend-deno/services/Redis.res
+cicd_rules/banned_language_file:frontend/src/App.res
+cicd_rules/banned_language_file:frontend/src/Main.res
+cicd_rules/banned_language_file:frontend/src/bindings/Axios.res
+cicd_rules/banned_language_file:frontend/src/bindings/Mui.res
+cicd_rules/banned_language_file:frontend/src/bindings/ReactRouter.res
+cicd_rules/banned_language_file:frontend/src/bindings/ReactToastify.res
+cicd_rules/banned_language_file:frontend/src/bindings/Recharts.res
+cicd_rules/banned_language_file:frontend/src/bindings/ReduxToolkit.res
+cicd_rules/banned_language_file:frontend/src/bindings/SocketIo.res
+cicd_rules/banned_language_file:frontend/src/components/Layout.res
+cicd_rules/banned_language_file:frontend/src/hooks/Redux.res
+cicd_rules/banned_language_file:frontend/src/pages/Alerts.res
+cicd_rules/banned_language_file:frontend/src/pages/Analytics.res
+cicd_rules/banned_language_file:frontend/src/pages/Dashboard.res
+cicd_rules/banned_language_file:frontend/src/pages/Login.res
+cicd_rules/banned_language_file:frontend/src/pages/LoomDetail.res
+cicd_rules/banned_language_file:frontend/src/pages/Settings.res
+cicd_rules/banned_language_file:frontend/src/services/Api.res
+cicd_rules/banned_language_file:frontend/src/services/Websocket.res
+cicd_rules/banned_language_file:frontend/src/store/Store.res
+cicd_rules/banned_language_file:frontend/src/store/slices/AlertsSlice.res
+cicd_rules/banned_language_file:frontend/src/store/slices/AuthSlice.res
+cicd_rules/banned_language_file:frontend/src/store/slices/LoomsSlice.res
+cicd_rules/banned_language_file:frontend/src/store/slices/MeasurementsSlice.res
