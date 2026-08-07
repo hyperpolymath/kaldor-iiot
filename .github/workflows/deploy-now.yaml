@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: MPL-2.0
+# This workflow is managed by gh actions-lock.
 name: Deploy Now
 on:
   - push
@@ -11,7 +12,7 @@ jobs:
       packages: write
     steps:
       - name: Fetch project data
-        uses: ionos-deploy-now/retrieve-project-info-action@cfc24ae16a455af73305ee65c853ec23dddcd11b # v1
+        uses: ionos-deploy-now/retrieve-project-info-action@v1.5.2
         id: project
         with:
           api-key: ${{ secrets.IONOS_API_KEY }}
@@ -19,18 +20,18 @@ jobs:
           service-host: api-eu.ionos.space
       - name: checkout
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
+        uses: actions/checkout@v7.0.1
         with:
           submodules: 'recursive'
       - name: Render templates
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: ionos-deploy-now/template-renderer-action@f90800cda6ff05947f58f27d6f9178c7bbd5180e # v2.2.0
+        uses: ionos-deploy-now/template-renderer-action@v2.2.0
         id: template
         with:
           secrets: ""
       - name: Deploy to IONOS
         if: ${{ steps.project.outputs.deployment-enabled == 'true' }}
-        uses: ionos-deploy-now/deploy-to-ionos-action@452884710a8fec9421c32d6c8ab2c69566703b02 # v1
+        uses: ionos-deploy-now/deploy-to-ionos-action@v2.1.0
         with:
           project: ${{ secrets.IONOS_PROJECT_ID }}
           branch-id: ${{ steps.project.outputs.branch-id }}
