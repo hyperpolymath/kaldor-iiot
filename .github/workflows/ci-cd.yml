@@ -105,7 +105,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4.2.0
+        uses: docker/setup-buildx-action@v4.3.0
       - name: Build API image
         working-directory: backend/api
         run: docker build -t kaldor-iiot-api:latest .
