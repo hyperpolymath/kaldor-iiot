@@ -1,7 +1,0 @@
-{
-  "name": "kaldor-iiot-backend",
-  "sources": [{"dir": ".", "subdirs": true}],
-  "package-specs": [{"module": "es6", "in-source": true}],
-  "suffix": ".res.js",
-  "dependencies": ["@rescript/core"]
-}
