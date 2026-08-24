@@ -1,104 +1,100 @@
-<!--
-SPDX-License-Identifier: CC-BY-SA-4.0
-Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
--->
-# Kaldor IIoT - Deployment Guide
+== Kaldor IIoT - Deployment Guide
 
-## Table of Contents
+=== Table of Contents
 
-1. [Prerequisites](#prerequisites)
-2. [Local Development](#local-development)
-3. [Production Deployment](#production-deployment)
-4. [IONOS Deploy Now](#ionos-deploy-now)
-5. [Docker Deployment](#docker-deployment)
-6. [Kubernetes Deployment](#kubernetes-deployment)
-7. [Security Hardening](#security-hardening)
-8. [Monitoring Setup](#monitoring-setup)
-9. [Backup and Recovery](#backup-and-recovery)
+[arabic]
+. link:#prerequisites[Prerequisites]
+. link:#local-development[Local Development]
+. link:#production-deployment[Production Deployment]
+. link:#ionos-deploy-now[IONOS Deploy Now]
+. link:#docker-deployment[Docker Deployment]
+. link:#kubernetes-deployment[Kubernetes Deployment]
+. link:#security-hardening[Security Hardening]
+. link:#monitoring-setup[Monitoring Setup]
+. link:#backup-and-recovery[Backup and Recovery]
 
-## Prerequisites
+=== Prerequisites
 
-### Required Software
+==== Required Software
 
-- Docker 20.10+
-- Docker Compose 2.0+
-- Git 2.30+
-- Node.js 18+ (for development)
-- Python 3.9+ (for analytics)
+* Docker 20.10+
+* Docker Compose 2.0+
+* Git 2.30+
+* Node.js 18+ (for development)
+* Python 3.9+ (for analytics)
 
-### Required Accounts
+==== Required Accounts
 
-- IONOS account (for Deploy Now)
-- SMTP server (for email alerts)
-- Twilio account (optional, for SMS)
-- Domain name with SSL certificate
+* IONOS account (for Deploy Now)
+* SMTP server (for email alerts)
+* Twilio account (optional, for SMS)
+* Domain name with SSL certificate
 
-### Hardware Requirements
+==== Hardware Requirements
 
-**Minimum (Development)**
-- 4 CPU cores
-- 8 GB RAM
-- 50 GB storage
-- 100 Mbps network
+*Minimum (Development)* - 4 CPU cores - 8 GB RAM - 50 GB storage - 100
+Mbps network
 
-**Recommended (Production)**
-- 8 CPU cores
-- 16 GB RAM
-- 200 GB SSD storage
-- 1 Gbps network
-- UPS backup power
+*Recommended (Production)* - 8 CPU cores - 16 GB RAM - 200 GB SSD
+storage - 1 Gbps network - UPS backup power
 
-## Local Development
+=== Local Development
 
-### 1. Clone Repository
+==== 1. Clone Repository
 
-```bash
+[source,bash]
+----
 git clone https://github.com/your-org/kaldor-iiot.git
 cd kaldor-iiot
-```
+----
 
-### 2. Configure Environment
+==== 2. Configure Environment
 
-```bash
+[source,bash]
+----
 cp .env.example .env
 # Edit .env with your settings
 nano .env
-```
+----
 
-### 3. Start Development Environment
+==== 3. Start Development Environment
 
-```bash
+[source,bash]
+----
 docker-compose up -d
-```
+----
 
-### 4. Initialize Database
+==== 4. Initialize Database
 
-```bash
+[source,bash]
+----
 docker-compose exec timescaledb psql -U kaldor -d kaldor_iiot -f /docker-entrypoint-initdb.d/001_initial_schema.sql
-```
+----
 
-### 5. Access Services
+==== 5. Access Services
 
-- Frontend: http://localhost
-- API: http://localhost:3000
-- API Docs: http://localhost:3000/api-docs
-- Grafana: http://localhost:3001
+* Frontend: http://localhost
+* API: http://localhost:3000
+* API Docs: http://localhost:3000/api-docs
+* Grafana: http://localhost:3001
 
-## Production Deployment
+=== Production Deployment
 
-### Automated Deployment
+==== Automated Deployment
 
 Use the deployment script:
 
-```bash
+[source,bash]
+----
 ./scripts/deployment/deploy.sh
-```
+----
 
-### Manual Deployment
+==== Manual Deployment
 
-#### 1. Prepare Server
+===== 1. Prepare Server
 
-```bash
+[source,bash]
+----
 # Update system
 sudo apt update && sudo apt upgrade -y
 
@@ -109,11 +105,12 @@ sudo sh get-docker.sh
 # Install Docker Compose
 sudo curl -L "https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-```
+----
 
-#### 2. Configure Firewall
+===== 2. Configure Firewall
 
-```bash
+[source,bash]
+----
 # Allow HTTP/HTTPS
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
@@ -124,77 +121,85 @@ sudo ufw allow 8883/tcp
 
 # Enable firewall
 sudo ufw enable
-```
+----
 
-#### 3. Setup SSL Certificates
+===== 3. Setup SSL Certificates
 
-```bash
+[source,bash]
+----
 # Using Let's Encrypt
 sudo apt install certbot
 sudo certbot certonly --standalone -d your-domain.com
-```
+----
 
-#### 4. Configure Environment
+===== 4. Configure Environment
 
-```bash
+[source,bash]
+----
 # Production environment variables
 nano .env
-```
+----
 
 Required production settings:
-```env
+
+[source,env]
+----
 NODE_ENV=production
 DB_PASSWORD=<strong-password>
 REDIS_PASSWORD=<strong-password>
 JWT_SECRET=<min-32-characters>
-```
+----
 
-#### 5. Deploy Application
+===== 5. Deploy Application
 
-```bash
+[source,bash]
+----
 docker-compose -f docker-compose.prod.yml up -d
-```
+----
 
-## IONOS Deploy Now
+=== IONOS Deploy Now
 
-### Setup
+==== Setup
 
-1. Fork the repository on GitHub
-2. Go to IONOS Deploy Now
-3. Connect your GitHub account
-4. Select the Kaldor-IIoT repository
-5. Configure build settings:
-   - Build command: `npm run build`
-   - Output directory: `dist`
+[arabic]
+. Fork the repository on GitHub
+. Go to IONOS Deploy Now
+. Connect your GitHub account
+. Select the Kaldor-IIoT repository
+. Configure build settings:
+* Build command: `+npm run build+`
+* Output directory: `+dist+`
 
-### GitHub Secrets
+==== GitHub Secrets
 
 Add these secrets to your repository:
 
-```
+....
 IONOS_API_KEY=<your-api-key>
 IONOS_PROJECT_ID=<your-project-id>
 DB_PASSWORD=<database-password>
 JWT_SECRET=<jwt-secret>
-```
+....
 
-### Deploy
+==== Deploy
 
 Push to main branch:
 
-```bash
+[source,bash]
+----
 git push origin main
-```
+----
 
 Deployment happens automatically via GitHub Actions.
 
-## Docker Deployment
+=== Docker Deployment
 
-### Production Docker Compose
+==== Production Docker Compose
 
-Create `docker-compose.prod.yml`:
+Create `+docker-compose.prod.yml+`:
 
-```yaml
+[source,yaml]
+----
 version: '3.8'
 
 services:
@@ -209,19 +214,21 @@ services:
       - kaldor-network
 
   # ... other services
-```
+----
 
-### Best Practices
+==== Best Practices
 
-1. **Use specific image tags** (not `latest`)
-2. **Set restart policies** (`restart: unless-stopped`)
-3. **Use Docker volumes** for persistent data
-4. **Enable health checks** for all services
-5. **Resource limits** to prevent resource exhaustion
+[arabic]
+. *Use specific image tags* (not `+latest+`)
+. *Set restart policies* (`+restart: unless-stopped+`)
+. *Use Docker volumes* for persistent data
+. *Enable health checks* for all services
+. *Resource limits* to prevent resource exhaustion
 
 Example resource limits:
 
-```yaml
+[source,yaml]
+----
 services:
   api:
     deploy:
@@ -232,19 +239,20 @@ services:
         reservations:
           cpus: '1'
           memory: 1G
-```
+----
 
-## Kubernetes Deployment
+=== Kubernetes Deployment
 
-### Prerequisites
+==== Prerequisites
 
-- Kubernetes cluster (1.24+)
-- kubectl configured
-- Helm 3+
+* Kubernetes cluster (1.24+)
+* kubectl configured
+* Helm 3+
 
-### Deploy with Helm
+==== Deploy with Helm
 
-```bash
+[source,bash]
+----
 # Add Kaldor IIoT Helm repo
 helm repo add kaldor https://charts.kaldor-iiot.example.com
 
@@ -254,11 +262,12 @@ helm install kaldor-iiot kaldor/kaldor-iiot \
   --create-namespace \
   --set database.password=<db-password> \
   --set jwt.secret=<jwt-secret>
-```
+----
 
-### Manual Deployment
+==== Manual Deployment
 
-```bash
+[source,bash]
+----
 # Apply configurations
 kubectl apply -f k8s/namespace.yaml
 kubectl apply -f k8s/secrets.yaml
@@ -266,24 +275,26 @@ kubectl apply -f k8s/configmaps.yaml
 kubectl apply -f k8s/deployments/
 kubectl apply -f k8s/services/
 kubectl apply -f k8s/ingress.yaml
-```
+----
 
-## Security Hardening
+=== Security Hardening
 
-### 1. Change Default Credentials
+==== 1. Change Default Credentials
 
-```sql
+[source,sql]
+----
 -- Change admin password
 UPDATE users
 SET password_hash = crypt('NewSecurePassword', gen_salt('bf'))
 WHERE username = 'admin';
-```
+----
 
-### 2. Configure SSL/TLS
+==== 2. Configure SSL/TLS
 
-Update `nginx.conf`:
+Update `+nginx.conf+`:
 
-```nginx
+[source,nginx]
+----
 server {
     listen 443 ssl http2;
     ssl_certificate /etc/nginx/ssl/cert.pem;
@@ -293,52 +304,57 @@ server {
 
     # ... rest of config
 }
-```
+----
 
-### 3. Enable MQTT Authentication
+==== 3. Enable MQTT Authentication
 
-Update `mosquitto.conf`:
+Update `+mosquitto.conf+`:
 
-```conf
+[source,conf]
+----
 allow_anonymous false
 password_file /mosquitto/config/password.txt
-```
+----
 
 Create password file:
 
-```bash
+[source,bash]
+----
 mosquitto_passwd -c password.txt device_user
-```
+----
 
-### 4. Database Security
+==== 4. Database Security
 
-```sql
+[source,sql]
+----
 -- Create read-only user for analytics
 CREATE USER analytics_ro WITH PASSWORD 'secure_password';
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO analytics_ro;
 
 -- Revoke unnecessary permissions
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-```
+----
 
-### 5. Rate Limiting
+==== 5. Rate Limiting
 
-Already configured in `server.js`:
+Already configured in `+server.js+`:
 
-```javascript
+[source,javascript]
+----
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100
 });
-```
+----
 
-## Monitoring Setup
+=== Monitoring Setup
 
-### Prometheus Configuration
+==== Prometheus Configuration
 
-File: `infrastructure/monitoring/prometheus.yml`
+File: `+infrastructure/monitoring/prometheus.yml+`
 
-```yaml
+[source,yaml]
+----
 global:
   scrape_interval: 15s
 
@@ -350,21 +366,23 @@ scrape_configs:
   - job_name: 'timescaledb'
     static_configs:
       - targets: ['timescaledb:9187']
-```
+----
 
-### Grafana Dashboards
+==== Grafana Dashboards
 
 Import dashboards:
 
-1. Login to Grafana (http://localhost:3001)
-2. Go to Dashboards → Import
-3. Import from `infrastructure/monitoring/grafana/dashboards/`
+[arabic]
+. Login to Grafana (http://localhost:3001)
+. Go to Dashboards → Import
+. Import from `+infrastructure/monitoring/grafana/dashboards/+`
 
-### Alerting Rules
+==== Alerting Rules
 
 Configure in Prometheus:
 
-```yaml
+[source,yaml]
+----
 groups:
   - name: kaldor_alerts
     rules:
@@ -373,22 +391,24 @@ groups:
         for: 10m
         annotations:
           summary: "High error rate detected"
-```
+----
 
-## Backup and Recovery
+=== Backup and Recovery
 
-### Database Backup
+==== Database Backup
 
-#### Automated Daily Backup
+===== Automated Daily Backup
 
-```bash
+[source,bash]
+----
 # Add to crontab
 0 2 * * * /usr/local/bin/backup-kaldor-db.sh
-```
+----
 
 Backup script:
 
-```bash
+[source,bash]
+----
 #!/bin/bash
 BACKUP_DIR=/var/backups/kaldor
 DATE=$(date +%Y%m%d_%H%M%S)
@@ -398,53 +418,62 @@ docker-compose exec -T timescaledb pg_dump -U kaldor kaldor_iiot | \
 
 # Keep only last 30 days
 find $BACKUP_DIR -name "*.sql.gz" -mtime +30 -delete
-```
+----
 
-#### Restore from Backup
+===== Restore from Backup
 
-```bash
+[source,bash]
+----
 gunzip < backup.sql.gz | \
   docker-compose exec -T timescaledb psql -U kaldor -d kaldor_iiot
-```
+----
 
-### Configuration Backup
+==== Configuration Backup
 
-```bash
+[source,bash]
+----
 # Backup all configurations
 tar -czf config-backup.tar.gz \
   .env \
   infrastructure/ \
   database/schemas/
-```
+----
 
-### Disaster Recovery
+==== Disaster Recovery
 
-1. **Stop all services**:
-   ```bash
-   docker-compose down
-   ```
+[arabic]
+. *Stop all services*:
++
+[source,bash]
+----
+docker-compose down
+----
+. *Restore database*:
++
+[source,bash]
+----
+gunzip < latest-backup.sql.gz | \
+  docker-compose exec -T timescaledb psql -U kaldor -d kaldor_iiot
+----
+. *Restore configurations*:
++
+[source,bash]
+----
+tar -xzf config-backup.tar.gz
+----
+. *Restart services*:
++
+[source,bash]
+----
+docker-compose up -d
+----
 
-2. **Restore database**:
-   ```bash
-   gunzip < latest-backup.sql.gz | \
-     docker-compose exec -T timescaledb psql -U kaldor -d kaldor_iiot
-   ```
+=== Health Checks
 
-3. **Restore configurations**:
-   ```bash
-   tar -xzf config-backup.tar.gz
-   ```
+==== Automated Health Monitoring
 
-4. **Restart services**:
-   ```bash
-   docker-compose up -d
-   ```
-
-## Health Checks
-
-### Automated Health Monitoring
-
-```bash
+[source,bash]
+----
 #!/bin/bash
 # health-check.sh
 
@@ -457,19 +486,21 @@ fi
 if ! docker-compose exec timescaledb pg_isready -U kaldor > /dev/null 2>&1; then
   echo "Database is down!" | mail -s "Kaldor IIoT Alert" admin@example.com
 fi
-```
+----
 
 Add to crontab:
 
-```bash
+[source,bash]
+----
 */5 * * * * /usr/local/bin/health-check.sh
-```
+----
 
-## Performance Optimization
+=== Performance Optimization
 
-### Database Optimization
+==== Database Optimization
 
-```sql
+[source,sql]
+----
 -- Create indexes
 CREATE INDEX CONCURRENTLY idx_measurements_loom_time
   ON bbw_measurements (loom_id, time DESC);
@@ -479,19 +510,21 @@ ANALYZE bbw_measurements;
 
 -- Vacuum
 VACUUM ANALYZE;
-```
+----
 
-### Redis Configuration
+==== Redis Configuration
 
-```redis
+[source,redis]
+----
 # memory optimization
 maxmemory 256mb
 maxmemory-policy allkeys-lru
-```
+----
 
-### Nginx Caching
+==== Nginx Caching
 
-```nginx
+[source,nginx]
+----
 proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=api_cache:10m max_size=1g;
 
 location /api/ {
@@ -499,13 +532,14 @@ location /api/ {
     proxy_cache_valid 200 5m;
     proxy_cache_key "$request_uri";
 }
-```
+----
 
-## Troubleshooting Deployments
+=== Troubleshooting Deployments
 
-### Container Won't Start
+==== Container Won’t Start
 
-```bash
+[source,bash]
+----
 # Check logs
 docker-compose logs <service-name>
 
@@ -514,30 +548,33 @@ docker stats
 
 # Inspect container
 docker inspect <container-id>
-```
+----
 
-### Database Connection Issues
+==== Database Connection Issues
 
-```bash
+[source,bash]
+----
 # Test connection
 docker-compose exec api node -e "const { Pool } = require('pg'); const pool = new Pool({ host: 'timescaledb' }); pool.query('SELECT NOW()').then(console.log).catch(console.error);"
-```
+----
 
-### SSL Certificate Issues
+==== SSL Certificate Issues
 
-```bash
+[source,bash]
+----
 # Verify certificate
 openssl x509 -in cert.pem -text -noout
 
 # Test SSL connection
 openssl s_client -connect your-domain.com:443
-```
+----
 
-## Rollback Procedure
+=== Rollback Procedure
 
-### Docker Compose Rollback
+==== Docker Compose Rollback
 
-```bash
+[source,bash]
+----
 # Stop current version
 docker-compose down
 
@@ -547,24 +584,23 @@ git checkout <previous-tag>
 # Rebuild and start
 docker-compose build
 docker-compose up -d
-```
+----
 
-### Database Rollback
+==== Database Rollback
 
-```bash
+[source,bash]
+----
 # Restore previous backup
 gunzip < previous-backup.sql.gz | \
   docker-compose exec -T timescaledb psql -U kaldor -d kaldor_iiot
-```
+----
 
-## Support
+=== Support
 
-For deployment issues:
-- Email: devops@kaldor-iiot.example.com
-- Documentation: https://docs.kaldor-iiot.example.com
-- GitHub Issues: Technical problems
+For deployment issues: - Email: devops@kaldor-iiot.example.com -
+Documentation: https://docs.kaldor-iiot.example.com - GitHub Issues:
+Technical problems
 
----
+'''''
 
-**Document Version**: 1.0
-**Last Updated**: 2025-11-22
+*Document Version*: 1.0 *Last Updated*: 2025-11-22
