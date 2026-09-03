@@ -3,13 +3,6 @@
 # Docs: https://gh.io/actions-lockfile
 version: 'v0.0.2'
 workflows:
-    '.github/workflows/governance.yml': []
-    '.github/workflows/hypatia-scan.yml': []
-    '.github/workflows/label-triage.yml': []
-    '.github/workflows/labels.yml': []
-    '.github/workflows/mirror.yml': []
-    '.github/workflows/scorecard.yml': []
-    '.github/workflows/secret-scanner.yml': []
     '.github/workflows/boj-build.yml':
         - 'actions/checkout@v7.0.1'
     '.github/workflows/casket-pages.yml':
@@ -39,16 +32,23 @@ workflows:
         - 'actions/checkout@v7.0.1'
         - 'hyperpolymath/a2ml-ecosystem@main'
         - 'hyperpolymath/k9-ecosystem@main'
+    '.github/workflows/governance.yml': []
+    '.github/workflows/hypatia-scan.yml': []
     '.github/workflows/instant-sync.yml':
         - 'peter-evans/repository-dispatch@v4.0.1'
+    '.github/workflows/label-triage.yml': []
+    '.github/workflows/labels.yml': []
     '.github/workflows/language-policy.yml':
         - 'actions/checkout@v7.0.1'
+    '.github/workflows/mirror.yml': []
     '.github/workflows/pages.yml':
         - 'actions/checkout@v7.0.1'
         - 'actions/deploy-pages@v5.0.0'
         - 'actions/upload-pages-artifact@v5.0.0'
     '.github/workflows/push-email-notify.yml':
-        - 'dawidd6/action-send-mail@v3.12.0'
+        - 'hyperpolymath/smtp-notify-action@v0.2.0'
+    '.github/workflows/scorecard.yml': []
+    '.github/workflows/secret-scanner.yml': []
     '.github/workflows/workflow-linter.yml':
         - 'actions/checkout@v7.0.1'
 dependencies:
@@ -94,11 +94,6 @@ dependencies:
         repo_id: 496012378
         uses:
             - 'actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f'
-    'dawidd6/action-send-mail@v3.12.0':
-        ref: 'v3.12.0'
-        commit: 'sha1-94de994a9f6fffee200243214e17002e2920bb59'
-        owner_id: 9713907
-        repo_id: 222439721
     'docker/setup-buildx-action@v4.3.0':
         ref: 'v4.3.0'
         commit: 'sha1-37fe631027851001ddb9b187196cc803df7f5f0e'
@@ -124,6 +119,11 @@ dependencies:
         commit: 'sha1-89f3c2702f4f650a92aa7411502f38da06abd562'
         owner_id: 6759885
         repo_id: 1275650185
+    'hyperpolymath/smtp-notify-action@v0.2.0':
+        ref: 'v0.2.0'
+        commit: 'sha1-ede1191ef6ff3ac02c4f4d9efdf837ee517e11d7'
+        owner_id: 6759885
+        repo_id: 1352485172
     'ionos-deploy-now/deploy-to-ionos-action@v2.1.0':
         ref: 'v2.1.0'
         commit: 'sha1-452884710a8fec9421c32d6c8ab2c69566703b02'
