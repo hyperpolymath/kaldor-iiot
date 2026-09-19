@@ -134,7 +134,7 @@ deno run scripts/governance/vote.ts \
 |Community standards + TPCF
 |✅ Complete
 
-|link:CONTRIBUTING.adoc[CONTRIBUTING.adoc]
+|link:.github/CONTRIBUTING.md[.github/CONTRIBUTING.md]
 |Contribution guide with TPCF perimeters
 |⚠️ In Progress
 
@@ -187,7 +187,7 @@ Kaldor-IIoT/
 ├── LICENSE.txt             # Palimpsest v0.8
 ├── SECURITY.md             # Security policy
 ├── CODE_OF_CONDUCT.md      # Community standards
-├── CONTRIBUTING.adoc       # Contribution guide
+├── .github/CONTRIBUTING.md       # Contribution guide
 ├── GOVERNANCE.adoc         # Governance model
 └── MAINTAINERS.md          # TPCF perimeter assignments
 ----
@@ -240,7 +240,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 
 == Contributing
 
-We welcome contributions from all 3 TPCF perimeters! See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc] for:
+We welcome contributions from all 3 TPCF perimeters! See link:.github/CONTRIBUTING.md[.github/CONTRIBUTING.md] for:
 
 * Perimeter 1 (Core): Consensus voting for critical changes
 * Perimeter 2 (Expert): 2-approval model for features
