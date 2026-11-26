@@ -2,3 +2,47 @@
 # Prettier must not reformat them.
 package.json
 pnpm-lock.yaml
+
+# No Prettier baseline yet: files below are not Prettier-formatted (or are stamped/generated).
+# Remove an entry once the file is formatted.
+.claude/CLAUDE.md
+.github/CONTRIBUTING.md
+.github/label-classifier.json
+.github/workflows/casket-pages.yml
+.github/workflows/ci-cd.yml
+.github/workflows/codeql.yml
+.github/workflows/deploy-now.yaml
+.github/workflows/dogfood-gate.yml
+.github/workflows/hypatia-scan.yml
+.github/workflows/labels.yml
+.github/workflows/pages.yml
+.github/workflows/push-email-notify.yml
+.github/workflows/scorecard.yml
+.github/workflows/workflow-linter.yml
+CLAUDE.md
+backend/api/middleware/auth.js
+backend/api/middleware/errorHandler.js
+backend/api/routes/alerts.js
+backend/api/routes/analytics.js
+backend/api/routes/auth.js
+backend/api/routes/config.js
+backend/api/routes/looms.js
+backend/api/routes/measurements.js
+backend/api/server.js
+backend/api/services/database.js
+backend/api/services/logger.js
+backend/api/services/mqtt.js
+backend/api/services/redis.js
+backend/api/tests/api.test.js
+docker-compose.yml
+frontend/index.html
+frontend/src/services/api.js
+frontend/src/services/websocket.js
+frontend/src/store/slices/alertsSlice.js
+frontend/src/store/slices/authSlice.js
+frontend/src/store/slices/loomsSlice.js
+frontend/src/store/slices/measurementsSlice.js
+frontend/src/store/store.js
+frontend/vite.config.js
+infrastructure/monitoring/prometheus.yml
+scripts/utilities/simulate-data.js
