@@ -88,7 +88,7 @@ package-manager-frontend = "npm (frontend only, ReScript compile step)"
 items = [
   "believe_me / assert_total (Idris2 proof debt)",
   "unsafeCoerce / Obj.magic (ReScript)",
-  "TypeScript files (use ReScript)",
+  "TypeScript files (use AffineScript)",
   "npm for backend runtime deps (use Deno)",
   "Python anywhere except SaltStack",
   "Go anywhere",
